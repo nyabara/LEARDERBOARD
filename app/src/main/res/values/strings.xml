@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LEARDERBOARD</string>
+    <string name="splash_screen">Splash Screen</string>
+    <string name="tv_error">Error Loading data from gadsapi</string>
+    <string name="country">Country</string>
+    <string name="skill">Skill</string>
+    <string name="gilbert">Gilbert</string>
+    <string name="btn_submit">SUBMIT</string>
+    <string name="email">Email Adress</string>
+    <string name="gitlink">Project on GITHUB (link)</string>
+    <string name="submit">SUBMIT</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="project_submission">Project Submission</string>
+    <string name="pop_text">Are you sure ?</string>
+    <string name="positive">Yes</string>
+    <string name="cancel"> </string>
+</resources>
