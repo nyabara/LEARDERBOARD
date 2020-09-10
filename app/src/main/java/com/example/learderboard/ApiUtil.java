@@ -20,7 +20,7 @@ public class ApiUtil {
     public static final String BASE_API_URL=" https://gadsapi.herokuapp.com/api/skilliq";
     public static final String BASE_HOUR_URL=" https://gadsapi.herokuapp.com/api/hours";
     public static final String QUERY_PARAMETER_KEY="q";
-    public static final String API_KEY="AIzaSyBQliyxmo2HvKMcBn4MDcNzB-o9sCBVjfY";
+    public static final String API_KEY="";
     public static final String KEY="key";
 
     public static URL buildUrl(String title){
