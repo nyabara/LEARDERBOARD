@@ -56,6 +56,7 @@ public class SubmissionActivity extends AppCompatActivity implements SubmitDialo
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
         String firtsname=Objects.requireNonNull(mFirstName.getText()).toString().trim();
         String lastname=Objects.requireNonNull(mLastName.getText()).toString().trim();
         String email = Objects.requireNonNull(mEmail.getText()).toString().trim();
@@ -66,12 +67,16 @@ public class SubmissionActivity extends AppCompatActivity implements SubmitDialo
             submitRequest.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(SubmissionActivity.this, "succes"+response.code(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SubmissionActivity.this, "succes"+response.code(), Toast.LENGTH_SHORT).show();
+                    SuccesDialog succesDialog=new SuccesDialog();
+                    succesDialog.show(getSupportFragmentManager(),"SuccesDialog");
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(SubmissionActivity.this, "error:"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SubmissionActivity.this, "error:"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                    ErrorDialog errorDialog=new ErrorDialog();
+                    errorDialog.show(getSupportFragmentManager(),"ErrorDialog");
 
                 }
             });

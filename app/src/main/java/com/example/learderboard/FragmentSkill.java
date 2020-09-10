@@ -29,9 +29,9 @@ public class FragmentSkill extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView=inflater.inflate(R.layout.skill_fragment,container,false);
+        mView = inflater.inflate(R.layout.skill_fragment, container, false);
         mRvSkills = (RecyclerView) mView.findViewById(R.id.recycler_view1);
-        LinearLayoutManager skillLayoutManager=new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager skillLayoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.VERTICAL, false);
         mRvSkills.setLayoutManager(skillLayoutManager);
         return mView;
     }
@@ -58,44 +58,44 @@ public class FragmentSkill extends Fragment {
 //        });
 
         try {
-            URL skillUrl=ApiUtil.buildUrl("api/skilliq");
+            URL skillUrl = ApiUtil.buildUrl("api/skilliq");
             new LeaderQueryTask().execute(skillUrl);
         } catch (Exception e) {
 //            e.printStackTrace();
-            Log.d("Error",e.getMessage());
+            Log.d("Error", e.getMessage());
         }
     }
-    public class LeaderQueryTask extends AsyncTask<URL,Void,String>{
+
+    public class LeaderQueryTask extends AsyncTask<URL, Void, String> {
 
         @Override
         protected String doInBackground(URL... urls) {
-            URL searchUrl=urls[0];
-            String result=null;
+            URL searchUrl = urls[0];
+            String result = null;
             try {
-                result=ApiUtil.getJson(searchUrl);
+                result = ApiUtil.getJson(searchUrl);
             } catch (IOException e) {
 //                e.printStackTrace();
-                Log.d("Error:",e.getMessage());
+                Log.d("Error:", e.getMessage());
             }
             return result;
         }
 
         @Override
         protected void onPostExecute(String result) {
-           tvError=mView.findViewById(R.id.tvError);
-           //mProgressBar.setVisibility(View.INVISIBLE);
-            if (result==null){
-               mRvSkills.setVisibility(View.INVISIBLE);
-               tvError.setVisibility(View.VISIBLE);
-            }
-         else {
-              mRvSkills.setVisibility(View.VISIBLE);
+            tvError = mView.findViewById(R.id.tvError);
+            //mProgressBar.setVisibility(View.INVISIBLE);
+            if (result == null) {
+                mRvSkills.setVisibility(View.INVISIBLE);
+                tvError.setVisibility(View.VISIBLE);
+            } else {
+                mRvSkills.setVisibility(View.VISIBLE);
                 tvError.setVisibility(View.INVISIBLE);
+                ArrayList<Leader> leaders = ApiUtil.getLeadersFromJson(result);
+                SkillsLeaderAdapter adapter = new SkillsLeaderAdapter(leaders);
+                mRvSkills.setAdapter(adapter);
+            }
 
-          }
-           ArrayList<Leader> leaders=ApiUtil.getLeadersFromJson(result);
-            SkillsLeaderAdapter adapter=new SkillsLeaderAdapter(leaders);
-           mRvSkills.setAdapter(adapter);
         }
 
         @Override

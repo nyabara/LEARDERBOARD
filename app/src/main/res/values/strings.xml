@@ -15,4 +15,6 @@
     <string name="pop_text">Are you sure ?</string>
     <string name="positive">Yes</string>
     <string name="cancel"> </string>
+    <string name="submission_error">Submission not Successful</string>
+    <string name="submission_success">Submission Successful</string>
 </resources>
