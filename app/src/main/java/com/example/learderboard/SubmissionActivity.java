@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,25 +56,27 @@ public class SubmissionActivity extends AppCompatActivity implements SubmitDialo
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        String firtsname=Objects.requireNonNull(mFirstName.getText()).toString();
-        String lastname=Objects.requireNonNull(mLastName.getText()).toString();
-        String email = Objects.requireNonNull(mEmail.getText()).toString();
-        String gitlink=Objects.requireNonNull(mLink.getText()).toString();
+        String firtsname=Objects.requireNonNull(mFirstName.getText()).toString().trim();
+        String lastname=Objects.requireNonNull(mLastName.getText()).toString().trim();
+        String email = Objects.requireNonNull(mEmail.getText()).toString().trim();
+        String gitlink=Objects.requireNonNull(mLink.getText()).toString().trim();
         if (!email.isEmpty() && !firtsname.isEmpty() && !lastname.isEmpty() && gitlink != null){
             SubmitService submitService= ServiceBuilder.buildService(SubmitService.class);
-            Call<Owner> submitRequest=submitService.creatOwner(firtsname,lastname,email,gitlink);
-            submitRequest.enqueue(new Callback<Owner>() {
+            Call<Void> submitRequest=submitService.creatOwner(email,firtsname,lastname,gitlink);
+            submitRequest.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<Owner> call, Response<Owner> response) {
-                    Toast.makeText(SubmissionActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(SubmissionActivity.this, "succes"+response.code(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onFailure(Call<Owner> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(SubmissionActivity.this, "error:"+t.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             });
+
+
         }
         else {
             Toast.makeText(this, "Fill all the form", Toast.LENGTH_SHORT).show();
