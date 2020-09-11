@@ -33,9 +33,12 @@
         android:id="@+id/btn_positive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
+        android:layout_gravity="center"
         android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#FF7F00"
         android:paddingTop="25dp"
+        android:background="@drawable/button_border"
         android:text="@string/positive"
          />
 
